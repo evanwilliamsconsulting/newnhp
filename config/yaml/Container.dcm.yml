@@ -11,23 +11,37 @@ Container:
             generator:
                 strategy: IDENTITY
     fields:
-        background:
-            type: blob
+        username:
+            type: text
             nullable: false
-            length: null
+            length: 50
+        original:
+            type: datetime
+            nullable: false
+        name:
+            type: string
+            nullable: false
+            length: 255
+        page:
+            type: integer
+            nullable: true
             options:
-                fixed: false
+                unsigned: false
+        background:
+            type: string 
+            nullable: true 
+            length: 255 
         frame:
             type: boolean
-            nullable: false
+            nullable: true 
         backgroundwidth:
             type: integer
-            nullable: false
+            nullable: true 
             options:
                 unsigned: false
         backgroundheight:
             type: integer
-            nullable: false
+            nullable: true 
             options:
                 unsigned: false
     lifecycleCallbacks: {  }

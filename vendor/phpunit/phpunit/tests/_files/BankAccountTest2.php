@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-use PHPUnit\Framework\TestCase;
+use phpunit\framework\TestCase;
 
 class BankAccountTest extends TestCase
 {

@@ -37,7 +37,9 @@ class RuntimeReflectionService implements ReflectionService
      */
     public function getParentClasses($class)
     {
+	//print("Reflection Service: GetParentClass");
         if ( ! class_exists($class)) {
+	    print("Class Does Not Exist");
             throw MappingException::nonExistingClass($class);
         }
 

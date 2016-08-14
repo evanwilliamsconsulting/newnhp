@@ -91,7 +91,7 @@ class Connection extends AbstractConnection
     public function getDsn()
     {
         if (!$this->dsn) {
-            throw new Exception\RuntimeException(
+            throw new Exception\RunTimeException(
                 'The DSN has not been set or constructed from parameters in connect() for this Connection'
             );
         }

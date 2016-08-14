@@ -14,9 +14,9 @@
 return array(
     'db' => array(
         'driver'         => 'PdoMysql',
-        'dsn'            => 'mysql:dbname=nhpress;host=localhost',
-        'username'       => 'root',
-        'password'       => 'ptH3984z'
+        'dsn'            => 'mysql:dbname=publishing;host=45.79.146.152',
+        'username'       => 'ewilliams',
+        'password'       => 'happy2Bme!'
     ),
     'service_manager' => array(
         'factories' => array(
@@ -42,11 +42,11 @@ return array(
             'orm_default' => array(
 	        'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
                 'params' => array(
-		    'host' => 'localhost',
+		    'host' => '45.79.146.152',
 		    'port' => '3306',
-		    'user' => 'root',
-		    'password' => 'ptH3984z', 
-		    'dbname' => 'nhpress',
+		    'user' => 'ewilliams',
+		    'password' => 'happy2Bme!', 
+		    'dbname' => 'publishing',
                     'charset'  => 'utf8',
                     'driverOptions' => array(
                         1002 => 'SET NAMES utf8'

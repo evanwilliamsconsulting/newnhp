@@ -19,7 +19,6 @@
 
 namespace DoctrineORMModule\Service;
 
-use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Migrations\Configuration\Configuration;
 use DoctrineModule\Service\AbstractFactory;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -52,6 +51,10 @@ class MigrationsConfigurationFactory extends AbstractFactory
         $configuration->setMigrationsNamespace($migrationsConfig['namespace']);
         $configuration->setMigrationsTableName($migrationsConfig['table']);
         $configuration->registerMigrationsFromDirectory($migrationsConfig['directory']);
+
+        if (method_exists($configuration, 'setMigrationsColumnName')) {
+            $configuration->setMigrationsColumnName($migrationsConfig['column']);
+        }
 
         return $configuration;
     }

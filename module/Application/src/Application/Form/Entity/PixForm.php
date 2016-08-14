@@ -20,13 +20,13 @@ class PixForm extends Form
 			$this->add(array(
 	    'name'=>'username',
 	    'type'=>'hidden'
-	));
+	    ));
         $this->add(array(
 	    'name'=>'original',
             'type' => 'DateTime',
             'options' => array(
                 'label' => 'Original Date',
-                'format'=> 'Ymd',
+                'format'=> 'd/m/Y',
             ),
          ));
         $this->add(array(

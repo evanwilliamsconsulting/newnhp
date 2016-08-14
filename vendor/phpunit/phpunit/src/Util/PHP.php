@@ -317,7 +317,6 @@ abstract class PHPUnit_Util_PHP
                 $test->addToAssertionCount($childResult['numAssertions']);
 
                 $childResult = $childResult['result'];
-                /* @var $childResult PHPUnit_Framework_TestResult */
 
                 if ($result->getCollectCodeCoverageInformation()) {
                     $result->getCodeCoverage()->merge(
@@ -330,7 +329,6 @@ abstract class PHPUnit_Util_PHP
                 $risky          = $childResult->risky();
                 $skipped        = $childResult->skipped();
                 $errors         = $childResult->errors();
-                $warnings       = $childResult->warnings();
                 $failures       = $childResult->failures();
 
                 if (!empty($notImplemented)) {
@@ -355,12 +353,6 @@ abstract class PHPUnit_Util_PHP
                     $result->addError(
                         $test,
                         $this->getException($errors[0]),
-                        $time
-                    );
-                } elseif (!empty($warnings)) {
-                    $result->addWarning(
-                        $test,
-                        $this->getException($warnings[0]),
                         $time
                     );
                 } elseif (!empty($failures)) {

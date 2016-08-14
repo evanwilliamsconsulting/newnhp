@@ -53,11 +53,18 @@ class PictureHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
     public function setPictureObject($pictureObject)
     {
         $this->pictureObject = $pictureObject;
-        $this->picture = $pictureObject->getPicture();
+        $picture = $pictureObject->getPicture();
+        $picture = "thumb_" . $picture;
+        $username = $this->getUsername();
+        $this->picture = "/uploads/" . $username . "/pix/" . $picture;
     }
     public function setUsername($username)
     {
         $this->username = $username;
+    }
+    public function getUsername()
+    {
+        return $this->username;
     }
     public function setItemId($itemId)
     {
@@ -77,6 +84,8 @@ class PictureHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
     	
     	$view = $this->getViewModel();
 		
+        $view->picture = $this->picture;
+
 	$view->setTemplate('items/picture.phtml');
 		
 	return $viewRender->render($view);

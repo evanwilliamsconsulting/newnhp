@@ -9,145 +9,97 @@
 
 namespace Application\Controller;
 
-
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Application\Entity\Container;
-use Hex\View\Helper\CustomHelper;
+
 use Doctrine\ORM\EntityManager;
-use Application\Form\Entity\ContainerForm;
+use Application\Form\Entity\CorrespondantForm;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\InputFilterAwareInterface;
-use Zend\Session\Container as SessionContainer;
+
+use Zend\Stdlib\ArrayObject as ArrayObject;
+
+use Application\Model\Items as Items;
+use Application\Model\Blocks as Blocks;
+use Application\Entity\Wordage as Wordage;
+
+use Application\View\Helper\WordageHelper as WordageHelper;
+use Application\Service\WordageService as WordageService;
+
+use Application\View\Helper\PictureHelper as PictureHelper;
+use Zend\Session\Container;
+
+use Application\View\Helper\UserToolbar as UserToolbar;
 
 class ContainerController extends AbstractActionController
 {
-	protected $em;
-	protected $authservice;
-	protected $username;
-	protected $log;
- 
+    protected $em;
+    protected $authservice;
+    protected $username;
+    protected $log;
+    protected $obj;
+
     public function __construct()
-	{
-	}
+    {
+    }
     public function getEntityManager()
     {
         if (null == $this->em)
         {
-            $this->em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-	}
-	return $this->em;
-    }
-	public function getAuthService()
-    {
-        if (! $this->authservice) {
-            $this->authservice = $this->getServiceLocator()
-                                      ->get('AuthService');
-        }
-        return $this->authservice;
+	    try {
+            	$this->em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+                //$this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+            } catch (Exception $e) {
+		print_r($e);
+		print_r($e-getPrevious());
+	       }
+    	}
+	   return $this->em;
     }
     public function indexAction()
     {
-		$view = new ViewModel();
+        $userSession = new Container('user');
+        if (!isset($userSession->test))
+    	{
+    	   $attempt = "notloggedin"; 
+    	   $username = "notloggedin";
+    	}
+    	else
+    	{
+    	   $attempt = $userSession->test;
+    	   $username = $userSession->username;
+    	}
+    	$userToolbar = new UserToolbar();
+    	$userToolbar->setUserName($username);
+    	$this->layout()->layouttest = $userToolbar->showOutput($attempt);
 
-		$view->content = $this->content();
-
-        return $view;
-    }
-    public function content()
-    {
-		return "content";
-    }
-	public function viewAction()
-    {
-    	// Load the logger
     	$this->log = $this->getServiceLocator()->get('log');
-    	$log = $this->log;
-    	$log->info("Container Controller view action");
-		
-		// Initialize the View
-    	$view = new ViewModel();
+        $log = $this->log;
+        $log->info("Presentation Controller");
 
-		// Retreive the parameters
-		$id = $this->params()->fromRoute('item');
-	    $log->info($id);
-		
-		// 2Do: Check to see that user is logged in
-    	if (!$this->getAuthService()->hasIdentity())
+        $em = $this->getEntityManager();
+
+        $layout = $this->layout();
+    	$layout->setTemplate('layout/presentation');
+
+        $blocks = new Blocks();
+        $blocks->setEntityManager($em);
+        $blocks->loadDataSource();
+
+	$view  = new ViewModel();
+
+	$output = "";
+	foreach ($blocks->toArray() as $key => $block)
         {
-	       return $this->redirect()->toUrl('http://www.newhollandpress.com/');
-        }
-    	// 2Do: Populate username with user's username
-    	$userSession = new SessionContainer('user');
-		$this->username = $userSession->username;
-		$log->info($this->username);
-		
-		$em = $this->getEntityManager();
-		
-		$container = $em->getRepository('Application\Entity\Container')->find($id);
+	    	$output .= print_r($block,true);
+		$output .= "</br>";
+		$output .= "</br>";
+	}
 
-		$topic = new \Application\View\Helper\TopicToolbar('container');
-		$view->topic = $topic;
-		
-		$view->content = print_r($container,true);
+        $view->blocks = $output;
 
         return $view;
     }
-    public function newAction()
-    {
-		$this->log = $this->getServiceLocator()->get('log');
-    	$log = $this->log;
-    	$log->info("new form");
-	    $view = new ViewModel();
-        $form = new ContainerForm();
-    	// 2015-09-10
-    	// 2Do: Check to see that user is logged in
-    	if (!$this->getAuthService()->hasIdentity())
-        {
-	       return $this->redirect()->toUrl('http://www.newhollandpress.com/container/index');
-        }
-    	// 2Do: Populate username with user's username
-    	$userSession = new SessionContainer('user');
-		$this->username = $userSession->username;
-		$log->info($this->username);
-    	// 2Do: Implement Calendar Widget in Javascript for date and fix validation
-        $form->get('submit')->setValue('Add');
-		
-		$container = new Container();
-
-        $form->bind($container);
-        $form->get('username')->setValue($this->username);
-        $request = $this->getRequest();
-		//$log->info($request);
-        if ($request->isPost()) {
-            $em = $this->getEntityManager();
-
-            $inputFilter = $container->getInputFilter();
-    
-	    $form->setInputFilter($inputFilter);
-	    $form->setData($request->getPost());
-		$log->info(print_r($request->getPost(),true));
-		//$theData = $form->getData();
-		//$log->info(print_r($theData,true));
-	    if ($form->isValid())
-	    {
-	       $log->info("is valid!");
-		   $container->exchangeArray($request->getPost());
-		   $log->info("data exchanged");
-		   $log->info(print_r($form->getData(),true));
-	       $em->persist($form->getData());
-		   $log->info("persisted");
-	       $em->flush();
-		   $log->info("flushed");
-	       return $this->redirect()->toUrl('http://www.newhollandpress.com/container/index');
-	    }
-
-/*
-*/
-
-        }
-	$view->form = $form;
-	return $view;
-    }	
 }
+    

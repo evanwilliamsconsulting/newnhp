@@ -1,7 +1,10 @@
-	<?php echo $this->toolbar(); ?>
+<?php echo $this->toolbar(); ?>
+<div id="content-inner">
+	<div id="editors-toolbar">Editor's Toolbar</div>
 	<?php
 	    foreach ($this->items as $key => $item)
 	    {
 	        echo $item();
 	    }
 	?>
+</div>

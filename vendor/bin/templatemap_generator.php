@@ -1,1 +1,1 @@
-../zendframework/zend-view/bin/templatemap_generator.php
+../zendframework/zendframework/bin/templatemap_generator.php

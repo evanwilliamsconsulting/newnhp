@@ -170,12 +170,7 @@ abstract class AbstractAccept implements HeaderInterface
             foreach ($paramsStrings as $param) {
                 $explode = explode('=', $param, 2);
 
-                if (count($explode) === 2) {
-                    $value = trim($explode[1]);
-                } else {
-                    $value = null;
-                }
-
+                $value = trim($explode[1]);
                 if (isset($value[0]) && $value[0] == '"' && substr($value, -1) == '"') {
                     $value = substr(substr($value, 1), 0, -1);
                 }
@@ -195,7 +190,7 @@ abstract class AbstractAccept implements HeaderInterface
      */
     public function getFieldValue($values = null)
     {
-        if ($values === null) {
+        if (!$values) {
             return $this->getFieldValue($this->fieldValueParts);
         }
 
@@ -231,9 +226,9 @@ abstract class AbstractAccept implements HeaderInterface
         );
 
         if ($escaped == $value && !array_intersect(str_split($value), $separators)) {
-            $value = $key . ($value ? '=' . $value : '');
+            $value = $key . '=' . $value;
         } else {
-            $value = $key . ($value ? '="' . $escaped . '"' : '');
+            $value = $key . '="' . $escaped . '"';
         }
 
         return $value;

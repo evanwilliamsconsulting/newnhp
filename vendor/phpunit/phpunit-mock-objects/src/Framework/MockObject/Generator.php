@@ -357,10 +357,10 @@ class PHPUnit_Framework_MockObject_Generator
      *
      * @return PHPUnit_Framework_MockObject_MockObject
      *
+     * @since  Method available since Release 1.0.0
+     *
      * @throws PHPUnit_Framework_MockObject_RuntimeException
      * @throws PHPUnit_Framework_Exception
-     *
-     * @since  Method available since Release 1.0.0
      */
     public function getMockForAbstractClass($originalClassName, array $arguments = [], $mockClassName = '', $callOriginalConstructor = true, $callOriginalClone = true, $callAutoload = true, $mockedMethods = [], $cloneArguments = true)
     {
@@ -420,10 +420,10 @@ class PHPUnit_Framework_MockObject_Generator
      *
      * @return PHPUnit_Framework_MockObject_MockObject
      *
+     * @since  Method available since Release 1.2.3
+     *
      * @throws PHPUnit_Framework_MockObject_RuntimeException
      * @throws PHPUnit_Framework_Exception
-     *
-     * @since  Method available since Release 1.2.3
      */
     public function getMockForTrait($traitName, array $arguments = [], $mockClassName = '', $callOriginalConstructor = true, $callOriginalClone = true, $callAutoload = true, $mockedMethods = [], $cloneArguments = true)
     {
@@ -484,10 +484,10 @@ class PHPUnit_Framework_MockObject_Generator
      *
      * @return object
      *
+     * @since  Method available since Release 1.1.0
+     *
      * @throws PHPUnit_Framework_MockObject_RuntimeException
      * @throws PHPUnit_Framework_Exception
-     *
-     * @since  Method available since Release 1.1.0
      */
     public function getObjectForTrait($traitName, array $arguments = [], $traitClassName = '', $callOriginalConstructor = true, $callOriginalClone = true, $callAutoload = true)
     {
@@ -514,8 +514,11 @@ class PHPUnit_Framework_MockObject_Generator
             'Trait_'
         );
 
-        $templateDir   = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'Generator' . DIRECTORY_SEPARATOR;
-        $classTemplate = new Text_Template($templateDir . 'trait_class.tpl');
+        $templateDir   = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'Generator' .
+                         DIRECTORY_SEPARATOR;
+        $classTemplate = new Text_Template(
+            $templateDir . 'trait_class.tpl'
+        );
 
         $classTemplate->setVar(
             [
@@ -1021,18 +1024,18 @@ class PHPUnit_Framework_MockObject_Generator
     }
 
     /**
-     * @param string       $templateDir
-     * @param string       $className
-     * @param string       $methodName
-     * @param bool         $cloneArguments
-     * @param string       $modifier
-     * @param string       $arguments_decl
-     * @param string       $arguments_call
-     * @param string       $return_type
-     * @param string       $reference
-     * @param bool         $callOriginalMethods
-     * @param bool         $static
-     * @param string|false $deprecation
+     * @param string $templateDir
+     * @param string $className
+     * @param string $methodName
+     * @param bool   $cloneArguments
+     * @param string $modifier
+     * @param string $arguments_decl
+     * @param string $arguments_call
+     * @param string $return_type
+     * @param string $reference
+     * @param bool   $callOriginalMethods
+     * @param bool   $static
+     * @param string $deprecation
      *
      * @return string
      */
@@ -1055,15 +1058,13 @@ class PHPUnit_Framework_MockObject_Generator
         }
 
         if (false !== $deprecation) {
-            $deprecation         = "The $className::$methodName method is deprecated ($deprecation).";
+            $deprecation = "The $className::$methodName method is deprecated ($deprecation).";
             $deprecationTemplate = new Text_Template($templateDir . 'deprecation.tpl');
-
             $deprecationTemplate->setVar(
-                [
-                    'deprecation' => var_export($deprecation, true),
-                ]
+                array(
+                'deprecation' => var_export($deprecation, true),
+                )
             );
-
             $deprecation = $deprecationTemplate->render();
         }
 
@@ -1222,7 +1223,7 @@ class PHPUnit_Framework_MockObject_Generator
      */
     private function isVariadic(ReflectionParameter $parameter)
     {
-        return method_exists(ReflectionParameter::class, 'isVariadic') && $parameter->isVariadic();
+        return method_exists('ReflectionParameter', 'isVariadic') && $parameter->isVariadic();
     }
 
     /**
@@ -1234,7 +1235,7 @@ class PHPUnit_Framework_MockObject_Generator
      */
     private function hasType(ReflectionParameter $parameter)
     {
-        return method_exists(ReflectionParameter::class, 'hasType') && $parameter->hasType();
+        return method_exists('ReflectionParameter', 'hasType') && $parameter->hasType();
     }
 
     /**
@@ -1244,7 +1245,7 @@ class PHPUnit_Framework_MockObject_Generator
      */
     private function hasReturnType(ReflectionMethod $method)
     {
-        return method_exists(ReflectionMethod::class, 'hasReturnType') && $method->hasReturnType();
+        return method_exists('ReflectionMethod', 'hasReturnType') && $method->hasReturnType();
     }
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
+namespace Application\Entity;
+
 
 
 use Doctrine\ORM\Mapping as ORM;
@@ -7,45 +9,69 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Container
  */
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="container")
+ */
 class Container
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
-     */
+     * 
+     * @ORM\Column(name="username", type="string", length=255, nullable=false)
+     *
+     **/
     private $username;
 
     /**
-     * @var \DateTime
+     * @var string
+     *
+     * @ORM\Column(name="original", type="string", length=255, nullable=false)
      */
     private $original_date;
 
-    /**
-     * @var string
-     */
-    private $title;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="background", type="string", length=255, nullable=false)
      */
     private $background;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
+
+    /**
      * @var boolean
+     *
+     * @ORM\Column(name="frame", type="boolean")
      */
     private $frame;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="backgroundwidth", type="integer")
      */
     private $backgroundwidth;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="backgroundheight", type="integer")
      */
     private $backgroundheight;
 
@@ -59,6 +85,17 @@ class Container
     {
         return $this->id;
     }
+
+    /**
+     * Get name
+     *
+     * @return string
+     *
+     */
+     public function getName()
+     {
+	return $this->name;
+     }
 
     /**
      * Set username
@@ -106,28 +143,6 @@ class Container
         return $this->original_date;
     }
 
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return Container
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
 
     /**
      * Set background

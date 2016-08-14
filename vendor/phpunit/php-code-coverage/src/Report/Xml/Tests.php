@@ -20,8 +20,7 @@ class Tests
         2 => 'INCOMPLETE', // PHPUnit_Runner_BaseTestRunner::STATUS_INCOMPLETE
         3 => 'FAILURE',    // PHPUnit_Runner_BaseTestRunner::STATUS_FAILURE
         4 => 'ERROR',      // PHPUnit_Runner_BaseTestRunner::STATUS_ERROR
-        5 => 'RISKY',      // PHPUnit_Runner_BaseTestRunner::STATUS_RISKY
-        6 => 'WARNING'     // PHPUnit_Runner_BaseTestRunner::STATUS_WARNING
+        5 => 'RISKY'       // PHPUnit_Runner_BaseTestRunner::STATUS_RISKY
     ];
 
     public function __construct(\DOMElement $context)

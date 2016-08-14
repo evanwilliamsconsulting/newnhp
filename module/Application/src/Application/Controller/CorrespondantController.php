@@ -17,7 +17,7 @@ use Application\Form\Entity\CorrespondantForm;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\InputFilterAwareInterface;
-use Zend\Session\Container;
+
 use Zend\Stdlib\ArrayObject as ArrayObject;
 
 use Application\Model\Items as Items;
@@ -27,6 +27,9 @@ use Application\View\Helper\WordageHelper as WordageHelper;
 use Application\Service\WordageService as WordageService;
 
 use Application\View\Helper\PictureHelper as PictureHelper;
+use Zend\Session\Container;
+
+use Application\View\Helper\UserToolbar as UserToolbar;
 
 class CorrespondantController extends AbstractActionController
 {
@@ -47,14 +50,29 @@ class CorrespondantController extends AbstractActionController
             	$this->em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
                 //$this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
             } catch (Exception $e) {
-		print_r($e);
-		print_r($e-getPrevious());
+		//print_r($e);
+		//print_r($e-getPrevious());
 	    }
 	}
 	return $this->em;
     }
     public function indexAction()
     {
+   		$userSession = new Container('user');
+		if (!isset($userSession->test))
+		{
+			$attempt = "notloggedin"; 
+			$username = "notloggedin";
+		}
+		else
+		{
+			$attempt = $userSession->test;
+			$username = $userSession->username;
+		}
+		$userToolbar = new UserToolbar();
+		$userToolbar->setUserName($username);
+		$this->layout()->layouttest = $userToolbar->showOutput($attempt);
+
 	$this->log = $this->getServiceLocator()->get('log');
         $log = $this->log;
         $log->info("Correspondant Controller");
@@ -68,7 +86,10 @@ class CorrespondantController extends AbstractActionController
 		if ($new == "wordage")
 		{
 			$log->info("wordage");
+			$todaysdate = date("d/m/Y",time());
+			$log->info($todaysdate);
 			$newWordage = new Wordage();
+			$newWordage->setOriginal($todaysdate);
 			$newWordage->setTitle("new");
 			$newWordage->setUsername("evanwill");
 			$newWordage->setWordage("new");
@@ -101,7 +122,7 @@ class CorrespondantController extends AbstractActionController
 			$id = $wordageObject->getId();
 			$original = $wordageObject->getOriginal();
 			$title = $wordageObject->getTitle();
-			$username = $wordageObject->getUsername();
+			//$username = $wordageObject->getUsername();
 			$bcolor = '#ff22bb';
 			$view = new ViewModel(array('wordage' => $wordage,
 				'id' => $id,
@@ -113,6 +134,7 @@ class CorrespondantController extends AbstractActionController
 			$wordageItem = new WordageHelper();
 			$wordageItem->setServiceLocator($this->getServiceLocator());
 			$wordageItem->setViewModel($view);
+			$wordageItem->setUsername($username);
 			$wordageItem->setWordageObject($item["object"]);
 			$itemArray[] = $wordageItem;
 		}
@@ -123,7 +145,7 @@ class CorrespondantController extends AbstractActionController
 			$id = $pictureObject->getId();
 			$original = $pictureObject->getOriginal();
 			$caption = $pictureObject->getCaption();
-			$username = $pictureObject->getUsername();
+			//$username = $pictureObject->getUsername();
 			$bcolor = '#00bbbb';
 			$view = new ViewModel(array('picture' => $picture,
 				'id' => $id,
@@ -135,6 +157,7 @@ class CorrespondantController extends AbstractActionController
 			$pictureItem = new PictureHelper();
 			$pictureItem->setServiceLocator($this->getServiceLocator());
 			$pictureItem->setViewModel($view);
+			$pictureItem->setUsername($username);
 			$pictureItem->setPictureObject($item["object"]);
 			$itemArray[] = $pictureItem;
 		}		

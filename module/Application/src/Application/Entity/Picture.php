@@ -26,7 +26,11 @@ class Picture implements InputFilterAwareInterface
         $this->id = (isset($data['id'])) ? $data['id'] : null;
         $this->username = (isset($data['username'])) ? $data['username'] : null;
         $this->original = (isset($data['original'])) ? $data['original'] : null;
+        $this->width = (isset($data['width'])) ? $data['width'] : null;
+        $this->height = (isset($data['height'])) ? $data['height'] : null;
         $this->title= (isset($data['title'])) ? $data['title'] : null;
+        $this->caption= (isset($data['caption'])) ? $data['caption'] : null;
+        $this->credit= (isset($data['credit'])) ? $data['credit'] : null;
         $this->picture = (isset($data['picture'])) ? $data['picture'] : null;
         $this->columnSize = (isset($data['columnSize'])) ? $data['columnSize'] : null;
     }
@@ -54,7 +58,7 @@ class Picture implements InputFilterAwareInterface
                 'name' => 'original',
                 'required' => false,
                 'options' => array(
-                	'format' => 'Ymd'
+                	'format' => 'd/m/Y'
 				)
             ))
 			);
@@ -66,17 +70,17 @@ class Picture implements InputFilterAwareInterface
             )));
 
             $inputFilter->add(
-            	$factory->createInput(array(
-                'name' => 'wordage',
+                $factory->createInput(array(
+                'name' => 'caption',
                 'required' => false,
             )));
 
             $inputFilter->add(
-            	$factory->createInput(array(
-                'name' => 'columnSize',
+                $factory->createInput(array(
+                'name' => 'credit',
                 'required' => false,
             )));
- 
+
             $this->inputFilter = $inputFilter;
         }
         return $this->inputFilter;

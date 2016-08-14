@@ -257,10 +257,36 @@ return array(
                     ),
                 ),
             ), 
+            'presentation' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/presentation/index',
+                    'defaults' => array(
+                       '__NAMESPACE__' => 'Application\Controller',
+                       'controller' => 'presentation',
+                       'action' => 'index',
+                    ),
+                ), 
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'process' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/[:action]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                            ),
+                        ),
+                    ),
+                ),
+	    ),
             'correspondant' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route' => '/correspondant/',
+                    'route' => '/correspondant/index',
                     'defaults' => array(
                        '__NAMESPACE__' => 'Application\Controller',
                        'controller' => 'correspondant',
@@ -376,6 +402,7 @@ return array(
             'Application\Controller\Wordage' => 'Application\Controller\WordageController',
             'Application\Controller\Picture' => 'Application\Controller\PictureController',
             'Application\Controller\Correspondant' => 'Application\Controller\CorrespondantController',
+            'Application\Controller\Presentation' => 'Application\Controller\PresentationController',
             'Application\Controller\Article' => 'Application\Controller\ArticleController',
         ),
     ),
@@ -386,7 +413,8 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => array(
-            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/layout'           => __DIR__ . '/../view/layout/index.phtml',
+            'layout/presentation'           => __DIR__ . '/../view/layout/presentation.phtml',
             'layout/correspondant'           => __DIR__ . '/../view/layout/correspondant.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',

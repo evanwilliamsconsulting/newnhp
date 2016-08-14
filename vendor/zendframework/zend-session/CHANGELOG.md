@@ -2,49 +2,6 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.7.3 - 2016-07-05
-
-### Added
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- [#51](https://github.com/zendframework/zend-session/pull/51) provides a fix to
-  the `DbTableGateway` save handler to prevent infinite recursion when
-  attempting to destroy an expired record during initial read operations.
-- [#45](https://github.com/zendframework/zend-session/pull/45) updates the
-  `SessionManager::regenerateId()` method to only regenerate the identifier if a
-  session already exists.
-
-## 2.7.2 - 2016-06-24
-
-### Added
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- [#46](https://github.com/zendframework/zend-session/pull/46) provides fixes to
-  each of the `Cache` and `DbTaleGateway` save handlers to ensure they work
-  when used under PHP 7.
-
 ## 2.7.1 - 2016-05-11
 
 ### Added

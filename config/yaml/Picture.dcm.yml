@@ -11,6 +11,13 @@ Picture:
             generator:
                 strategy: IDENTITY
     fields:
+        username:
+            type: text
+            nullable: false
+            length: 50
+        original:
+            type: datetime
+            nullable: false
         caption:
             type: string
             nullable: false

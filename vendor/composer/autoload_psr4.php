@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/type-resolver/src', $vendorDir . '/phpdocumentor/reflection-docblock/src'),
     'Zend\\XmlRpc\\' => array($vendorDir . '/zendframework/zend-xmlrpc/src'),
     'Zend\\View\\' => array($vendorDir . '/zendframework/zend-view/src'),
     'Zend\\Version\\' => array($vendorDir . '/zendframework/zend-version/src'),
@@ -59,13 +58,12 @@ return array(
     'Zend\\Cache\\' => array($vendorDir . '/zendframework/zend-cache/src'),
     'Zend\\Barcode\\' => array($vendorDir . '/zendframework/zend-barcode/src'),
     'Zend\\Authentication\\' => array($vendorDir . '/zendframework/zend-authentication/src'),
-    'ZendDeveloperTools\\' => array($vendorDir . '/zendframework/zend-developer-tools/src'),
-    'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Interop\\Container\\' => array($vendorDir . '/container-interop/container-interop/src/Interop/Container'),
+    'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib/Doctrine/ORM'),
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),
     'Doctrine\\Common\\Cache\\' => array($vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache'),
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),

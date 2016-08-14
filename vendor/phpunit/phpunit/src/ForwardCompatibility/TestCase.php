@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PHPUnit\Framework;
+namespace phpunit\framework;
 
 use PHPUnit_Framework_TestCase;
 

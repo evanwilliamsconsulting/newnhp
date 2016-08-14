@@ -1,4 +1,7 @@
 <div style="background-color:<?php echo $this->bcolor;?>" class="wordage-item" id="wordage-<?php echo $this->id;?>">
+    <div id="wordage-toolbar">
+	<span id="delete-wordage" onclick="clickDeleteWordage('wordage-<?php echo $this->id;?>')">Delete</span>
+    </div>
     <div class="wordage-item-title">
         <span><?php echo $this->title;?></span>
 	<br />

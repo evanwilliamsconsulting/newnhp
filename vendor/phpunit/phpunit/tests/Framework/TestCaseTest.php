@@ -10,7 +10,6 @@
 
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'NoArgTestCaseTest.php';
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Singleton.php';
-require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Mockable.php';
 
 $GLOBALS['a']  = 'a';
 $_ENV['b']     = 'b';
@@ -581,48 +580,5 @@ class Framework_TestCaseTest extends PHPUnit_Framework_TestCase
     {
         $o = new ClassWithScalarTypeDeclarations;
         $o->foo(null, null);
-    }
-
-    public function testCreateMockFromClassName()
-    {
-        $mock = $this->createMock(Mockable::class);
-
-        $this->assertInstanceOf(Mockable::class, $mock);
-        $this->assertInstanceOf(PHPUnit_Framework_MockObject_MockObject::class, $mock);
-    }
-
-    public function testCreateMockMocksAllMethods()
-    {
-        /** @var Mockable $mock */
-        $mock = $this->createMock(Mockable::class);
-
-        $this->assertNull($mock->foo());
-        $this->assertNull($mock->bar());
-    }
-
-    public function testCreatePartialMockDoesNotMockAllMethods()
-    {
-        /** @var Mockable $mock */
-        $mock = $this->createPartialMock(Mockable::class, ['foo']);
-
-        $this->assertNull($mock->foo());
-        $this->assertTrue($mock->bar());
-    }
-
-    public function testCreateMockSkipsConstructor()
-    {
-        /** @var Mockable $mock */
-        $mock = $this->createMock(Mockable::class);
-
-        $this->assertFalse($mock->constructorCalled);
-    }
-
-    public function testCreateMockDisablesOriginalClone()
-    {
-        /** @var Mockable $mock */
-        $mock = $this->createMock(Mockable::class);
-
-        $cloned = clone $mock;
-        $this->assertFalse($cloned->cloned);
     }
 }

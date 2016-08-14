@@ -1,4 +1,15 @@
-<div id="<?php echo $this->wordageid; ?>" class="wordage-edit-text"> 
-    <a onclick="closeEditWordage()" href="#">close</a>
-    <textarea id="wordage-edit-textarea" rows="24" cols="200"><?php echo $this->actualWords; ?></textarea>
+<div class="wordage-edit" id="wordage-<?php echo $this->wordageid;?>">
+	<div id="editors-toolbar">
+		<ul>
+			<li><span onclick="closeWordageEdit('<?php echo $this->id; ?>')">Close</span></li>
+		</ul>
+	</div>
+    <div class="wordage-edit-title">
+        <span><?php echo $this->title;?></span>
+	<br />
+        <span><?php echo $this->original;?></span>
+    </div>
+	<div id="<?php echo $this->wordageid; ?>" class="wordage-edit-text"> 
+    	<textarea id="wordage-edit-textarea" rows="24" cols="200"><?php echo $this->actualWords; ?></textarea>
+	</div>
 </div>

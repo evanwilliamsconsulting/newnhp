@@ -1,5 +1,4 @@
-<?php
-/**
+<?php /**
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
@@ -27,6 +26,7 @@ use Application\View\Helper\UserToolbar as UserToolbar;
 use Application\View\Helper\SiteToolbar as SiteToolbar;
 use Zend\Session\SessionManager;
 use Zend\Session\Container;
+use Zend\Session\Config\SessionConfig;
 use Zend\Log\Logger;
 use Zend\Log\Writer\FirePhp as FirePhpWriter;
 use Zend\Log\Writer\FirePhp\FirePhpBridge;
@@ -42,9 +42,21 @@ use Application\Entity\Correspondant;
 
 class Module implements AutoloaderProviderInterface, ViewHelperProviderInterface, ConfigProviderInterface
 {
+	// masterzendframework.com Using Sessions in Zend Framework
+    public function initSession($config)
+    {
+	$sessionConfig = new SessionConfig();
+	$sessionConfig->setOptions($config);
+	$sessionManager = new SessionManager($sessionConfig);
+	$sessionManager->start();
+	Container::setDefaultManager($sessionManager);
+    }
     public function getServiceConfig()
     {
         return array(
+            'invokables' => array(
+                'image_service' => 'Imagine\Gd\Imagine',
+            ),
             'factories'=>array(
                 'log' => function($sm) {
                     $log = new Logger();
@@ -107,11 +119,18 @@ class Module implements AutoloaderProviderInterface, ViewHelperProviderInterface
         $serviceManager = $e->getApplication()->getServiceManager();
 	    $viewModel = $e->getApplication()->getMvcEvent()->getViewModel();
 
+/*
 	    $userToolbar = new UserToolbar();
 		$siteToolbar = new SiteToolbar();
 
 	    $viewModel->user_toolbar = $userToolbar;
 		$viewModel->site_toolbar = $siteToolbar;
+*/
+	$this->initSession(array(
+		'remember_me_seconds' => 180,
+		'use_cookies' => true,
+		'cookie_httponly' => true,
+	));
     }
     public function getConfig()
     {
@@ -137,6 +156,11 @@ class Module implements AutoloaderProviderInterface, ViewHelperProviderInterface
                 },
 		        'toolbar' => function($sm) {
 		            $helper = new View\Helper\Toolbar;
+		            return $helper;
+		        },
+		        'user_toolbar' => function($sm) {
+		            $helper = new View\Helper\UserToolbar;
+			    $helper->setRenderer(new \Application\Renderer\HtmlActive());
 		            return $helper;
 		        },
 		        'pixhelper' => function($sm) {

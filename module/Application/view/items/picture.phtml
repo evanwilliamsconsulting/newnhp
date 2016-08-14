@@ -1,4 +1,7 @@
 <div style="background-color:<?php echo $this->bcolor;?>" class="picture-item" id="picture-<?php echo $this->id;?>">
+    <div id="picture-toolbar">
+	<span id="delete-picture" onclick="clickDeletePicture('picture-<?php echo $this->id;?>')">Delete</span>
+    </div>
     <div class="picture-item-caption">
         <span><?php echo $this->caption;?></span>
 	<br />

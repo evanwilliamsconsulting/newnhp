@@ -129,10 +129,56 @@ class PictureController extends AbstractActionController
         $response->setContent(json_encode($variables));
 	return $response;
     }
+    public function deleteAction()
+    {
+		// Wordage Delete Action
+		
+		// Set up Log and announce that we are here!
+	    	$this->log = $this->getServiceLocator()->get('log');
+		$log = $this->log;
+		$log->info("picture delete action");
+
+		// Make sure we are logged in and retrieve user!
+	   	$userSession = new Container('user');
+		if (!isset($userSession->test))
+		{
+			$attempt = "notloggedin"; 
+			$username = "notloggedin";
+		}
+		else
+		{
+			$attempt = $userSession->test;
+			$username = $userSession->username;
+		}
+
+		// Retrieve Wordage Id that was passed in and perform delete!
+		$pictureid = $this->params()->fromQuery('id');
+		$log->info($pictureid);
+		// Looking for: wordage- or 8 chars
+		$theId = substr($pictureid,strpos('-',$pictureid)+8,strlen($pictureid));
+		$theArray = array('id' => $theId);
+		$em = $this->getEntityManager();
+		$picture = $em->getRepository('Application\Entity\Picture')->findOneBy($theArray);
+		$em->remove($picture);
+		$em->flush();
+
+		// Return JSON okay!
+		$variables = array("id" => $pictureid,"result" => "ok");
+		$jsonModel = new JsonModel($variables);
+	    $response = $this->getResponse();
+	    $response->setStatusCode(200);
+	    $response->setContent(json_encode($variables));
+		return $response;
+    }
     public function editAction()
     {
-	$viewModel = new ViewModel();
-	$viewModel->setTemplate("edit");
+   	$this->log = $this->getServiceLocator()->get('log');
+   	$log = $this->log;
+   	$log->info("view action");
+	$view = new ViewModel();
+	$view->setTemplate("edit");
+
+
 	$renderer = new PhpRenderer();
 	$resolver = new Resolver\AggregateResolver();
 	$renderer->setResolver($resolver);
@@ -149,20 +195,29 @@ class PictureController extends AbstractActionController
 	$resolver->attach($map);
 	$resolver->attach($stack);
 
+
+	$layout = $this->layout();
+	// This second layout look really should happen if logged in.
+	$layout->setTemplate('layout/picture');
+	
 	$pictureid = $this->params()->fromQuery('id');
 	// Looking for: picture- or 8 chars
 	$theId = substr($pictureid,strpos('-',$pictureid)+8,strlen($pictureid));
-	$viewModel->setVariable('theid',$theId);
+	$view->setVariable('theid',$theId);
 
 	$theArray = array('id' => $theId);
 
 	$em = $this->getEntityManager();
 	$picture = $em->getRepository('Application\Entity\Picture')->findOneBy($theArray);
 	$actualPicture  = $picture->getPicture();
-	$viewModel->setVariable('actualPicture',$actualPicture);
-	$viewModel->setVariable('id',$theId);
+	$fullPicturePath="/uploads/ewilliams/pix/" . $actualPicture;
+	$view->setVariable('actualPicture',$fullPicturePath);
+	$view->setVariable('id',$theId);
 
-	$variables = array("id" => $pictureid,"view" => $renderer->render($viewModel),"thepicture" => print_r($picture,true));
+	$log->info($actualPicture);
+
+
+	$variables = array("id" => $pictureid,"view" => $renderer->render($view),"thepicture" => print_r($picture,true));
 	$jsonModel = new JsonModel($variables);
         $response = $this->getResponse();
         $response->setStatusCode(200);

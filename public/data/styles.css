@@ -34,11 +34,13 @@
 	position:relative;
 	top:-10px;
 }
-#correspondent-toolbar {
-	width: 80%;
+#user-toolbar {
+}
+#correspondant-toolbar {
+	width: 100%;
 	background-color:#dd2266;
 	color:white;
-	margin-left:20%;
+	margin-left:0%;
 	margin-right:auto;
 	margin-top:5px;
 	margin-bottom:0px;
@@ -46,7 +48,6 @@
 	flush:right;
 	text-align:left;
 	background-color:black;
-	margin-left:20%;
 	margin-right:auto;
 	position:relative;
 	top:-10px;
@@ -89,13 +90,10 @@
 	font-size:20pt;
 }
 .wordage-item {
-	width: 80%;
+	width: 880px;
 	background-color:#da2f61;
 	color:white;
-	margin-left:20%;
-	margin-right:auto;
-	margin-top:5px;
-	margin-bottom:0px;
+	margin:auto;
 	position:relative;
 	flush:right;
 	text-align:left;
@@ -107,14 +105,14 @@
 }
 .wordage-item-title {
 	position:relative;
-	width:30%;
+	width:100%;
 	left:0%;
 	float:right;
 }
 .wordage-item-text {
-	width:70%;
-	left:0%;
-	top:10px;
+	width:880px;
+	margin:auto;
+	padding:5px;
 	height:auto;
 	flush:right;
 	position:relative;
@@ -123,22 +121,20 @@
 }
 .wordage-edit-text {
 	position:relative;
-	top:10px;
-	left:10px;
-	height:60%;
-	width:60%;
+	margin:auto;
+	height:auto;
+	width:880px;
 	background-color:white;
 	color:black;
-	margin:10px;
 }
 .wordage-edit-text > textarea {
 	width:99%;
 }
 .picture-item {
-	width: 80%;
+	width: 100%;
 	background-color:#da2f61;
 	color:white;
-	margin-left:20%;
+	margin-left:0%;
 	margin-right:auto;
 	margin-top:5px;
 	margin-bottom:0px;
@@ -199,11 +195,19 @@
 #login_box {
 	background-color:#da2f61;
 	color:white;
-	width:250px;
-	height:195px;
+	width:880px;
+	height:50px;
 	position:absolute;
-	top:210px;
-	left:160px;
+	top:50px;
+}
+#login_box_list li
+{
+	display:inline;
+	list-style:none;
+}
+.close_line a
+{
+	color:white;
 }
 .item {
 	width: 79%;
@@ -228,8 +232,13 @@
     list-style:none;
 }
 .itemtab {
-    font-size:18pt;
     display:inline;
+}
+.itemtab a {
+    color:white;
+    font-weight:bold;
+    font-size:11pt;
+    text-decoration:none;
 }
 #footer {
 	width: auto;
@@ -246,6 +255,8 @@
 	height:20px;
 }
 #hidden {
+	margin-left:auto;
+	margin-right:auto;
 }
 #picture {
         position:absolute;
@@ -257,24 +268,12 @@
 	opacity:1.0;
 }
 #wordage {
-        position:absolute;
+    position:absolute;
 	margin:auto;
-	top:30px;
-	left:30px;
-	width:80%;
-	height:80%;
+	width:880px;
+	height:300px;
 	background-color:white;
 	opacity:1.0;
-}
-#floats {
-	position:fixed;
-	background-color:#dd2266;
-	margin:auto;
-	top:5%;
-	left:5%;
-	width:90%;
-	height:90%;
-	opacity: 0.9;
 }
 #dialog {
 	display:none;

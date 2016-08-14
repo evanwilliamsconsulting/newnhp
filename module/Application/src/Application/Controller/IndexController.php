@@ -16,6 +16,9 @@ use Application\Form\Panel\LoginForm;
 use Zend\EventManager\EventManger;
 use Publish\BlockHelper as BlockHelper;
 use Publish\Block\Broadsheet;
+use Zend\Session\Container;
+use Application\Active;
+use Application\View\Helper\UserToolbar as UserToolbar;
 
 class IndexController extends AbstractActionController
 {
@@ -26,9 +29,25 @@ class IndexController extends AbstractActionController
     {
     	$log = $this->getServiceLocator()->get('log');
     	$log->info('Will work equally well');
-	    $view = new ViewModel();
-	    $log->info("Got View Model");
-	    $view->content = $this->content();
+	$userSession = new Container('user');
+	if (!isset($userSession->test))
+	{
+		$attempt = "notloggedin"; 
+		$username = "notloggedin";
+	}
+	else
+	{
+		$attempt = $userSession->test;
+		$username = $userSession->username;
+        return $this->redirect()->toRoute('correspondant');
+	}
+	$log->info($username);
+	$log->info($attempt);
+	$userToolbar = new UserToolbar();
+	$userToolbar->setUserName($username);
+	$this->layout()->layouttest = $userToolbar->showOutput($attempt);
+	$log->info("Got View Model");
+	$this->layout()->content = $this->content();
 	/*
 				$year = '2015';
 				$month = '12';
@@ -59,7 +78,7 @@ class IndexController extends AbstractActionController
 		 * 
 		 */
     	$this->getServiceLocator()->get('log')->info("Hi");
-        return $view;
+        //return $view;
     }
 	public function loginAction()
 	{

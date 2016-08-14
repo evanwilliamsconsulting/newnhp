@@ -134,7 +134,7 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
     /**
      * The name of the expected Exception.
      *
-     * @var string
+     * @var mixed
      */
     private $expectedException = null;
 
@@ -574,16 +574,12 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
     }
 
     /**
-     * @param string $exception
+     * @param mixed $exception
      *
      * @since Method available since Release 5.2.0
      */
     public function expectException($exception)
     {
-        if (!is_string($exception)) {
-            throw PHPUnit_Util_InvalidArgumentHelper::factory(1, 'string');
-        }
-
         $this->expectedException = $exception;
     }
 
@@ -1484,7 +1480,7 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
             throw new PHPUnit_Framework_Exception;
         }
 
-        $this->locale[$category] = setlocale($category, 0);
+        $this->locale[$category] = setlocale($category, null);
 
         $result = call_user_func_array('setlocale', $args);
 
@@ -1525,34 +1521,11 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
     protected function createMock($originalClassName)
     {
         return $this->getMockBuilder($originalClassName)
-                    ->disableOriginalConstructor()
-                    ->disableOriginalClone()
-                    ->disableArgumentCloning()
-                    ->disallowMockingUnknownTypes()
-                    ->getMock();
-    }
-
-    /**
-     * Returns a partial test double for the specified class.
-     *
-     * @param string $originalClassName
-     * @param array  $methods
-     *
-     * @return PHPUnit_Framework_MockObject_MockObject
-     *
-     * @throws PHPUnit_Framework_Exception
-     *
-     * @since Method available since Release 5.5.0
-     */
-    protected function createPartialMock($originalClassName, array $methods)
-    {
-        return $this->getMockBuilder($originalClassName)
-                    ->disableOriginalConstructor()
-                    ->disableOriginalClone()
-                    ->disableArgumentCloning()
-                    ->disallowMockingUnknownTypes()
-                    ->setMethods($methods)
-                    ->getMock();
+            ->disableOriginalConstructor()
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->disallowMockingUnknownTypes()
+            ->getMock();
     }
 
     /**

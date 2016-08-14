@@ -8,21 +8,39 @@
             echo $this->form()->openTag($form);
             echo $this->formHidden($form->get('id'));
         ?>
-        <h4>Username:
-        <?php
-            echo $this->formRow($form->get('username'));
-        ?></h4>
-        <h4>Password
-        <?php
-            echo $this->formRow($form->get('password'));
-        ?></h4>
-        <h4>Remember Me!
-        <?php
-            echo $this->formRow($form->get('rememberme'));
-        ?></h4>
-        <?php
-            echo $this->formSubmit($form->get('submit'));
+	<ul id="login_box_list">
+	    <li>
+                <span>Username:&nbsp;</span>
+                <span><?php
+                    echo $this->formRow($form->get('username'));
+                ?></span>
+	    </li>
+	    <li>
+                <span>Password:&nbsp;</span>
+                <span><?php
+                    echo $this->formRow($form->get('password'));
+                ?></span>
+	    </li>
+	    <li>
+                <span>Remember Me!&nbsp;</span>
+                <span><?php
+                    echo $this->formRow($form->get('rememberme'));
+                ?></span>
+	    </li>
+	    <li>
+	        <span><?php
+                   echo $this->formSubmit($form->get('submit'));
+		?></span<
+	    </li>
+	    <li>
+		<span>&nbsp;&nbsp;&nbsp;</span>
+		<span>&nbsp;&nbsp;&nbsp;</span>
+	    </li>
+	    <li>
+		<span class="close_line"><a href="#" onclick="closeForm();">Close</a></span>
+	    </li>
+	</ul>
+	<?php
             echo $this->form()->closeTag();
         ?>
 </div>
-

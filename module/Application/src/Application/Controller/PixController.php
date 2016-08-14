@@ -11,15 +11,19 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Application\Entity\Pix;
+use Application\Entity\Picture as Pix;
 use Application\Form\Entity\PixForm;
 use Doctrine\ORM\EntityManager;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\InputFilterAwareInterface;
-use Zend\Session\Container;
+
 use Zend\Validator\File\Size;
 use Zend\Validator\File\Extension;
+use Zend\Session\Container;
+
+use Application\View\Helper\UserToolbar as UserToolbar;
+use Imagine\Image\Box as Box;
 
 class PixController extends AbstractActionController
 {
@@ -102,21 +106,32 @@ class PixController extends AbstractActionController
     }
    public function newAction()
     {
-	$this->log = $this->getServiceLocator()->get('log');
+	    $this->log = $this->getServiceLocator()->get('log');
     	$log = $this->log;
     	$log->info("new form");
-	$view = new ViewModel();
+	    $view = new ViewModel();
         $form = new PixForm();
     	// 2015-09-10
     	// 2Do: Check to see that user is logged in
-    	if (!$this->getAuthService()->hasIdentity())
-        {
-	       return $this->redirect()->toUrl('http://www.newhollandpress.com/pix/index');
-        }
+   		$userSession = new Container('user');
+		if (!isset($userSession->test))
+		{
+			$attempt = "notloggedin"; 
+			$username = "notloggedin";
+		}
+		else
+		{
+			$attempt = $userSession->test;
+			$username = $userSession->username;
+			$this->username = $username;
+		}
+		$userToolbar = new UserToolbar();
+		$userToolbar->setUserName($username);
+		$this->layout()->layouttest = $userToolbar->showOutput($attempt);
+
+
+
     	// 2Do: Populate username with user's username
-    	$userSession = new Container('user');
-	$this->username = $userSession->username;
-	$log->info($this->username);
     	// 2Do: Implement Calendar Widget in Javascript for date and fix validation
         $form->get('submit')->setValue('Add');
         $pix = new Pix();
@@ -130,60 +145,86 @@ class PixController extends AbstractActionController
 
             $inputFilter = $pix->getInputFilter();
     
-	    $form->setInputFilter($inputFilter);
-	    $form->setData($request->getPost());
-	    $log->info(print_r($request->getPost(),true));
+	    	$form->setInputFilter($inputFilter);
+	    	$form->setData($request->getPost());
+	    	$log->info(print_r($request->getPost(),true));
 		
-	    if ($form->isValid())
-	    {
-	    	$post=$request->getPost();
-			$log->info($request);
-			$log->info(print_r($post,true));
-			$pix->exchangeArray($post);
-			$log->info("data exchanged");
-			$files =  $request->getFiles();
-			//$log->info($files);
-			//die();
-			//$log->info(print_r($form->getData(),true));
-	    	/* Untested code to upload pix 
-			 * https://samsonasik.wordpress.com/2012/08/31/zend-framework-2-creating-upload-form-file-validation/
-			 */
-			//$filename = $post['picture'];
-	    	$size = new Size(array('min'=>1000));
-			$extension = new Extension(array('extension' => array('jpg')));
-			$adapter = new \Zend\File\Transfer\Adapter\Http();
+	    	if ($form->isValid())
+	    	{
+	    		$post=$request->getPost();
+				$log->info($request);
+				$log->info(print_r($post,true));
+				$pix->exchangeArray($post);
+				$log->info("data exchanged");
+				$files =  $request->getFiles();
+				//$log->info($files);
+				//die();
+				//$log->info(print_r($form->getData(),true));
+		    	/* Untested code to upload pix 
+				 * https://samsonasik.wordpress.com/2012/08/31/zend-framework-2-creating-upload-form-file-validation/
+				 */
+				//$filename = $post['picture'];
+		    	$size = new Size(array('min'=>1000));
+				$extension = new Extension(array('extension' => array('jpg')));
+				$adapter = new \Zend\File\Transfer\Adapter\Http();
 			
-	       $log->info("is valid!");
-		   $log->info(print_r($files,true));
+		       $log->info("is valid!");
+			   $log->info(print_r($files,true));
 		   
-		   $fileDestinationRoot = "/var/www/html/uploads/";
-		   $fileDestination = $fileDestinationRoot . $this->username;
+			   $fileDestinationRoot = "/var/www/html/uploads/";
+			   $fileDestination = $fileDestinationRoot . $this->username;
 		   
-		   $pixSubPath = "pix";
-		   $fileDestination .= "/";
-		   $fileDestination .= $pixSubPath;
-		   $fileDestination .= "/";
+			   $pixSubPath = "pix";
+			   $fileDestination .= "/";
+			   $fileDestination .= $pixSubPath;
+			   $fileDestination .= "/";
+
+			   $fullFileName = $fileDestination;
+			   $thumbFileName = $fileDestination;
+			   $thumbFileName .= "thumb_";
 		   
-	   	   $adapter->setDestination($fileDestination);
-		   if ($adapter->receive($files['files']['name'])) {
-     		   	  $newfile = $adapter->getFileName();
-			      $log->info($newfile);
-				  $expandFile = explode('/',$newfile);
-				  $expandFileCount = count($expandFile)-1;
-				  $log->info(print_r($expandFile[$expandFileCount],true));
-				  $pixFileName = $expandFile[$expandFileCount];
-				  
-			}
-		   $dataArray = $form->getData();
-		   $log->info(print_r($dataArray,true));
-		   $dataArray->setPicture($pixFileName);
-	       //$em->persist($form->getData());
-	       $em->persist($dataArray);
-		   $log->info("persisted");
-	       $em->flush();
-		   $log->info("flushed");
-	       return $this->redirect()->toUrl('http://www.newhollandpress.com/pix/index');
-	    }
+		       $log->info($fileDestination);
+		   	   $adapter->setDestination($fileDestination);
+			   if ($adapter->receive($files['files']['name'])) {
+	     		   	  $newfile = $adapter->getFileName();
+				      $log->info($newfile);
+					  $expandFile = explode('/',$newfile);
+					  $expandFileCount = count($expandFile)-1;
+					  $log->info(print_r($expandFile[$expandFileCount],true));
+					  $pixFileName = $expandFile[$expandFileCount];
+			   }
+
+			   $fullFileName .= $pixFileName;
+			   $thumbFileName .= $pixFileName;
+
+			   $dataArray = $form->getData();
+//			   $log->info(print_r($dataArray,true));
+			   $dataArray->setPicture($pixFileName);
+		       //$em->persist($form->getData());
+		       $em->persist($dataArray);
+			   $log->info("persisted");
+		       $em->flush();
+			   $log->info("flushed");
+			   // Now Save as Thumbnail
+			   $sm = $this->getServiceLocator();
+			   $imagine = $sm->get('image_service');
+			   $image = $imagine->open($fullFileName);
+
+			   $size = $image->getSize();
+			   $divider = $size->getHeight() / 100;
+    		   $calcWidth = $size->getWidth() / $divider;
+    		   $calcHeight = 100;
+
+ 			   $image->resize(new Box($calcWidth, $calcHeight));
+
+ 			   $image->save($thumbFileName);
+
+		       return $this->redirect()->toUrl('/pix/index');
+		    }
+		    else // Form is not valid
+		    {
+		    	$log->info("Form is not valid.");
+		    }
 	    }
 	$view->form = $form;
 	return $view;

@@ -154,7 +154,7 @@ class PhoneNumber extends AbstractValidator
      */
     public function setCountry($country)
     {
-        $this->country = $country;
+        $this->country = strtoupper($country);
 
         return $this;
     }
@@ -201,12 +201,12 @@ class PhoneNumber extends AbstractValidator
 
         $country = $this->getCountry();
 
-        if (!$countryPattern = $this->loadPattern(strtoupper($country))) {
+        if (!$countryPattern = $this->loadPattern($country)) {
             if (isset($context[$country])) {
                 $country = $context[$country];
             }
 
-            if (!$countryPattern = $this->loadPattern(strtoupper($country))) {
+            if (!$countryPattern = $this->loadPattern($country)) {
                 $this->error(self::UNSUPPORTED);
 
                 return false;

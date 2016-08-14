@@ -21,6 +21,8 @@ use Zend\Session\Container;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver;
 
+use Application\View\Helper\UserToolbar as UserToolbar;
+
 class WordageController extends AbstractActionController
 {
     protected $em;
@@ -129,8 +131,71 @@ class WordageController extends AbstractActionController
         $response->setContent(json_encode($variables));
 	return $response;
     }
+    public function deleteAction()
+    {
+	// Wordage Delete Action
+	
+	// Set up Log and announce that we are here!
+        $this->log = $this->getServiceLocator()->get('log');
+	$log = $this->log;
+	$log->info("wordage delete action");
+
+	// Make sure we are logged in and retrieve user!
+    	$userSession = new Container('user');
+	if (!isset($userSession->test))
+	{
+		$attempt = "notloggedin"; 
+		$username = "notloggedin";
+	}
+	else
+	{
+		$attempt = $userSession->test;
+		$username = $userSession->username;
+	}
+	$userToolbar = new UserToolbar();
+	$userToolbar->setUserName($username);
+	$this->layout()->layouttest = $userToolbar->showOutput($attempt);
+
+	// Retrieve Wordage Id that was passed in and perform delete!
+	$wordageid = $this->params()->fromQuery('id');
+	$log->info($wordageid);
+	// Looking for: wordage- or 8 chars
+	$theId = substr($wordageid,strpos('-',$wordageid)+8,strlen($wordageid));
+	$theArray = array('id' => $theId);
+	$em = $this->getEntityManager();
+	$wordage = $em->getRepository('Application\Entity\Wordage')->findOneBy($theArray);
+	$em->remove($wordage);
+	$em->flush();
+
+	// Return JSON okay!
+	$variables = array("id" => $wordageid,"result" => "ok");
+	$jsonModel = new JsonModel($variables);
+        $response = $this->getResponse();
+        $response->setStatusCode(200);
+        $response->setContent(json_encode($variables));
+	return $response;
+    }
     public function editAction()
     {
+    	$this->log = $this->getServiceLocator()->get('log');
+    	$log = $this->log;
+    	$log->info("wordage edit action");
+
+    	$userSession = new Container('user');
+	if (!isset($userSession->test))
+	{
+		$attempt = "notloggedin"; 
+		$username = "notloggedin";
+	}
+	else
+	{
+		$attempt = $userSession->test;
+		$username = $userSession->username;
+	}
+	$userToolbar = new UserToolbar();
+	$userToolbar->setUserName($username);
+	$this->layout()->layouttest = $userToolbar->showOutput($attempt);
+    	
 	$viewModel = new ViewModel();
 	$viewModel->setTemplate("edit");
 	$renderer = new PhpRenderer();
@@ -149,7 +214,13 @@ class WordageController extends AbstractActionController
 	$resolver->attach($map);
 	$resolver->attach($stack);
 
+	$layout = $this->layout();
+	// This second layout look really should happen if logged in.
+	$layout->setTemplate('layout/wordage');
+
+
 	$wordageid = $this->params()->fromQuery('id');
+	$log->info($wordageid);
 	// Looking for: wordage- or 8 chars
 	$theId = substr($wordageid,strpos('-',$wordageid)+8,strlen($wordageid));
 	$viewModel->setVariable('theid',$theId);
@@ -160,7 +231,7 @@ class WordageController extends AbstractActionController
 	$wordage = $em->getRepository('Application\Entity\Wordage')->findOneBy($theArray);
 	$actualWords = $wordage->getWordage();
 	$viewModel->setVariable('actualWords',$actualWords);
-	$viewModel->setVariable('id',$theId);
+	$viewModel->setVariable('id',$wordageid);
 
 	$variables = array("id" => $wordageid,"view" => $renderer->render($viewModel),"thewordage" => print_r($wordage,true));
 	$jsonModel = new JsonModel($variables);
@@ -168,5 +239,35 @@ class WordageController extends AbstractActionController
         $response->setStatusCode(200);
         $response->setContent(json_encode($variables));
 	return $response;
+    }
+    public function updateAction()
+    {
+    	$this->log = $this->getServiceLocator()->get('log');
+    	$log = $this->log;
+    	$log->info("Wordage Update Action");
+
+		$variables = array("status" => "200");
+		$jsonModel = new JsonModel($variables);
+		$content = $this->getRequest()->getContent();
+		//$content = $this->params()->fromPost('content');
+
+		$wordageid = $this->params()->fromQuery('id');
+		$log->info($wordageid);
+		$theId = substr($wordageid,strpos('wordage-',$wordageid)+8,strlen($wordageid));
+		$theArray = array('id' => $theId);
+
+		$log->info($theId);
+
+		$em = $this->getEntityManager();
+		$wordage = $em->getRepository('Application\Entity\Wordage')->findOneBy($theArray);
+
+		$wordage->setWordage($content);
+		$em->persist($wordage);
+		$em->flush();
+
+        $response = $this->getResponse();
+        $response->setStatusCode(200);
+        $response->setContent(json_encode($variables));
+		return $response;
     }
 }

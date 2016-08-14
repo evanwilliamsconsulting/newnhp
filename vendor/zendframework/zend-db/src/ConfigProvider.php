@@ -35,9 +35,6 @@ class ConfigProvider
             'factories' => [
                 Adapter\AdapterInterface::class => Adapter\AdapterServiceFactory::class,
             ],
-            'aliases' => [
-                Adapter\Adapter::class => Adapter\AdapterInterface::class,
-            ],
         ];
     }
 }

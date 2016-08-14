@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit1d8f05b91b612fa73d27f9b86196819c
+class ComposerStaticInitbde5604eae6cb82ff419c3f48e0ba64c
 {
     public static $files = array (
         '34901568a1e26d13dd475cb2c85e0284' => __DIR__ . '/..' . '/zendframework/zend-form/autoload/formElementManagerPolyfill.php',
@@ -13,10 +13,6 @@ class ComposerStaticInit1d8f05b91b612fa73d27f9b86196819c
     );
 
     public static $prefixLengthsPsr4 = array (
-        'p' => 
-        array (
-            'phpDocumentor\\Reflection\\' => 25,
-        ),
         'Z' => 
         array (
             'Zend\\XmlRpc\\' => 12,
@@ -71,11 +67,6 @@ class ComposerStaticInit1d8f05b91b612fa73d27f9b86196819c
             'Zend\\Cache\\' => 11,
             'Zend\\Barcode\\' => 13,
             'Zend\\Authentication\\' => 20,
-            'ZendDeveloperTools\\' => 19,
-        ),
-        'W' => 
-        array (
-            'Webmozart\\Assert\\' => 17,
         ),
         'S' => 
         array (
@@ -93,6 +84,7 @@ class ComposerStaticInit1d8f05b91b612fa73d27f9b86196819c
         ),
         'D' => 
         array (
+            'Doctrine\\ORM\\' => 13,
             'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\Common\\Cache\\' => 22,
             'DeepCopy\\' => 9,
@@ -100,12 +92,6 @@ class ComposerStaticInit1d8f05b91b612fa73d27f9b86196819c
     );
 
     public static $prefixDirsPsr4 = array (
-        'phpDocumentor\\Reflection\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-        ),
         'Zend\\XmlRpc\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-xmlrpc/src',
@@ -314,14 +300,6 @@ class ComposerStaticInit1d8f05b91b612fa73d27f9b86196819c
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-authentication/src',
         ),
-        'ZendDeveloperTools\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/zendframework/zend-developer-tools/src',
-        ),
-        'Webmozart\\Assert\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/webmozart/assert/src',
-        ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
@@ -342,6 +320,10 @@ class ComposerStaticInit1d8f05b91b612fa73d27f9b86196819c
         array (
             0 => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container',
         ),
+        'Doctrine\\ORM\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/orm/lib/Doctrine/ORM',
+        ),
         'Doctrine\\Instantiator\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
@@ -357,11 +339,22 @@ class ComposerStaticInit1d8f05b91b612fa73d27f9b86196819c
     );
 
     public static $prefixesPsr0 = array (
+        'p' => 
+        array (
+            'phpDocumentor' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            ),
+        ),
         'Z' => 
         array (
             'ZendXml\\' => 
             array (
                 0 => __DIR__ . '/..' . '/zendframework/zendxml/library',
+            ),
+            'ZendDeveloperTools' => 
+            array (
+                0 => __DIR__ . '/..' . '/zendframework/zend-developer-tools/src',
             ),
         ),
         'P' => 
@@ -379,12 +372,15 @@ class ComposerStaticInit1d8f05b91b612fa73d27f9b86196819c
                 0 => __DIR__ . '/..' . '/phptal/phptal/classes',
             ),
         ),
+        'I' => 
+        array (
+            'Imagine' => 
+            array (
+                0 => __DIR__ . '/..' . '/imagine/imagine/lib',
+            ),
+        ),
         'D' => 
         array (
-            'Doctrine\\ORM\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/orm/lib',
-            ),
             'Doctrine\\DBAL\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/dbal/lib',
@@ -430,7 +426,6 @@ class ComposerStaticInit1d8f05b91b612fa73d27f9b86196819c
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
         'FirePHP' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/FirePHP.class.php',
-        'PHPUnit\\Framework\\TestCase' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/TestCase.php',
         'PHPUnit_Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit_Extensions_GroupTestSuite' => __DIR__ . '/..' . '/phpunit/phpunit/src/Extensions/GroupTestSuite.php',
         'PHPUnit_Extensions_PhptTestCase' => __DIR__ . '/..' . '/phpunit/phpunit/src/Extensions/PhptTestCase.php',
@@ -881,16 +876,17 @@ class ComposerStaticInit1d8f05b91b612fa73d27f9b86196819c
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
         'Zend\\I18n\\Translator\\Resources' => __DIR__ . '/..' . '/zendframework/zend-i18n-resources/src/Resources.php',
+        'phpunit\\framework\\TestCase' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/TestCase.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1d8f05b91b612fa73d27f9b86196819c::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1d8f05b91b612fa73d27f9b86196819c::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit1d8f05b91b612fa73d27f9b86196819c::$prefixesPsr0;
-            $loader->fallbackDirsPsr0 = ComposerStaticInit1d8f05b91b612fa73d27f9b86196819c::$fallbackDirsPsr0;
-            $loader->classMap = ComposerStaticInit1d8f05b91b612fa73d27f9b86196819c::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitbde5604eae6cb82ff419c3f48e0ba64c::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitbde5604eae6cb82ff419c3f48e0ba64c::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitbde5604eae6cb82ff419c3f48e0ba64c::$prefixesPsr0;
+            $loader->fallbackDirsPsr0 = ComposerStaticInitbde5604eae6cb82ff419c3f48e0ba64c::$fallbackDirsPsr0;
+            $loader->classMap = ComposerStaticInitbde5604eae6cb82ff419c3f48e0ba64c::$classMap;
 
         }, null, ClassLoader::class);
     }

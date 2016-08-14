@@ -866,22 +866,6 @@ class PHPUnit_Util_Configuration
     }
 
     /**
-     * Returns the test suite names from the configuration.
-     *
-     * @return array
-     */
-    public function getTestSuiteNames()
-    {
-        $names = [];
-        $nodes = $this->xpath->query('*/testsuite');
-        foreach ($nodes as $node) {
-            $names[] = $node->getAttribute('name');
-        }
-
-        return $names;
-    }
-
-    /**
      * @param DOMElement $testSuiteNode
      *
      * @return PHPUnit_Framework_TestSuite

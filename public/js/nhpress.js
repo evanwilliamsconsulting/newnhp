@@ -15,6 +15,10 @@ $(document).ready(function()
 		}
 	});
 */
+	closeForm = function()
+	{
+	    $("#hidden").hide();
+	}
 	clickLogin = function()
 	{
 		$.ajax({
@@ -22,6 +26,18 @@ $(document).ready(function()
 			url:"auth/login",
 			success: function(data) {
 				$("#hidden").html(data);
+			}
+		});
+		$("#hidden").show();
+	}
+	clickLogout = function()
+        {
+                $.ajax({
+			type:"POST",
+			url:"auth/logout",
+			success: function(data) {
+			     $("#logout").html(data);
+			     window.setTimeout(function() {window.location = "http://dev.newhollandpress.com/auth/home"}, 300)
 			}
 		});
 	}
@@ -47,13 +63,45 @@ $(document).ready(function()
 		type:"POST",
 		url:"/picture/edit?id=" + pictureitemid,
 		success: function(data) {
-		var objJSON = JSON.parse(data);
-		var thePictureText = objJSON.view	
-		$("#floats").show();
-		var theId = "#picture";
-		$(theId).html(thePictureText);
+			var objJSON = JSON.parse(data);
+			var thePictureText = objJSON.view	
+			$("#content-inner").show();
+			$("#content-inner").html(thePictureText);
+			darkr();
 		}
 	    });
+	}
+	clickDeleteWordage = function(wordagetextid)
+	{
+		var strconfirm = confirm("Are you sure you want to delete?");
+		if (strconfirm == false)
+		{
+			return true;
+		}
+		theWordageId = wordagetextid;
+		$.ajax({
+			type:"POST",
+			url:"/wordage/delete?id=" + wordagetextid,
+			success: function(data) {
+				window.location.href="/correspondant/index";
+			}
+		});
+	}
+	clickDeletePicture = function(picturetextid)
+	{
+		var strconfirm = confirm("Are you sure you want to delete?");
+		if (strconfirm == false)
+		{
+			return true;
+		}
+		thePictureId = picturetextid;
+		$.ajax({
+			type:"POST",
+			url:"/picture/delete?id=" + picturetextid,
+			success: function(data) {
+				window.location.href="/correspondant/index";
+			}
+		});
 	}
 	clickWordageItemText = function(wordagetextid)
 	{
@@ -61,13 +109,14 @@ $(document).ready(function()
 		$.ajax({
 			type:"POST",
 			url:"/wordage/edit?id=" + wordagetextid,
+			theWordageID:wordagetextid,
 			success: function(data) {
 				var objJSON = JSON.parse(data);
 				var theId = "#wordage";
 				var theWordageText = objJSON.view;
 				theTextAreaId = theId
-				$("#floats").show();
-				$(theId).html(theWordageText);
+				$("#content-inner").show();
+				$("#content-inner").html(theWordageText);
  				tinymce.init({
             				'selector': '#wordage-edit-textarea',
             				'plugins' : 'insertdatetime,link,image',
@@ -77,6 +126,22 @@ $(document).ready(function()
             				'theme__buttons2' : '',
             				'theme__buttons3' : ''
         			});
+			}
+		});
+	}
+	closeWordageEdit = function(wordagetextid)
+	{
+		var newContent = tinymce.activeEditor.getContent();
+		theWordageId = wordagetextid;
+		$.ajax({
+			type:"POST",
+			url:"/wordage/update?id=" + wordagetextid,
+			data:newContent,
+			theWordageID:wordagetextid,
+			success: function(data) {
+				//alert("update ran");
+				window.location.href="/correspondant/index";
+				//window.location.href="http://dev.newhollandpress.com/correspondant/index";
 			}
 		});
 	}
@@ -110,4 +175,31 @@ $(document).ready(function()
 		}
             	}).parent();
         }
+darkr = function()
+{
+          		var dkrm = new Darkroom('#target', {
+            			minWidth: 100,
+            			minHeight: 100,
+            			maxWidth: 600,
+            			maxHeight: 500,
+            			ratio: 4/3,
+            			backgroundColor: '#000',
+            			// Plugins options
+            			plugins: {
+              			//save: false,
+              				crop: {
+                  				quickCropKey: 67, //key "c"
+                  				//minHeight: 50,
+                  				//minWidth: 50,
+                  				//ratio: 4/3
+                			}
+              			},
+            			// Post initialize script
+            			initialize: function() {
+              				var cropPlugin = this.plugins['crop'];
+              				// cropPlugin.selectZone(170, 25, 300, 300);
+              				cropPlugin.requireFocus();
+              			}
+          		});
+	}
 });

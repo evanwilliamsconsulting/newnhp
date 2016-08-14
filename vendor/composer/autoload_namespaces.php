@@ -6,11 +6,13 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'phpDocumentor' => array($vendorDir . '/phpdocumentor/reflection-docblock/src'),
     'ZendXml\\' => array($vendorDir . '/zendframework/zendxml/library'),
+    'ZendDeveloperTools' => array($vendorDir . '/zendframework/zend-developer-tools/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'PHPTAL' => array($vendorDir . '/phptal/phptal/classes'),
-    'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),
+    'Imagine' => array($vendorDir . '/imagine/imagine/lib'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
     'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib'),
