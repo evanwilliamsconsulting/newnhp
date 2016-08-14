@@ -1,0 +1,3 @@
+    <div id="wordage-toolbar">
+	<span id="delete-wordage" onclick="clickDeleteWordage('wordage-<?php echo $this->id;?>')">Delete</span>
+    </div>

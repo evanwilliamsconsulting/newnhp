@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="/data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="/data/nhp.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/darkroomjs/build/darkroom.css">
+    <link rel="stylesheet" href="/darkroomjs/demo/css/page.css">
+    <script src="/resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="/resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="/tinymce/tinymce.min.js"></script>
+    <script src="/js/nhpress.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return '/resources//images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return '/resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return '/resources/reload.html'; };
+    </script>
+<script type="text/javascript">
+        tinymce.init({
+            selector: ".wordage-edit-textarea",
+            'plugins' : 'insertdatetime,link,image',
+            'theme' : 'modern',
+            'theme__layout_manager' : 'SimpleLayout',
+            'theme__buttons1' : 'backcolor, forecolor, |, bold, underline, strikethrough, |, numlist, bullist, charmap, |, undo, redo, |, anchor, link, tvlink, unlink',
+            'theme__buttons2' : '',
+            'theme__buttons3' : ''
+        });
+
+    </script>
+      <script src="/darkroomjs/demo/vendor/fabric.js"></script>
+  <script src="/darkroomjs/build/darkroom.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-5106157-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+  <body>
+  <div id="menubody">
+<div id="blank_footer">
+<br/>
+</div>
+<div id="above">
+	<?php echo $this->layouttest; ?>
+</div>
+<div id="nhpbox">
+    <div id="nhp_press" class="nhphead">
+        <div id="nhp_New" class="nhphead">New</div>
+        <div id="nhp_holland" class="nhphead">Holland</div>
+    	<span>Press</span>
+    </div>
+</div>
+<div id="menubox">
+    <ul id="menubar">
+        <li><span class="menuitem">Home</span></li>
+        <li>&nbsp;&nbsp;</li>
+        <li><span class="menuitem">Articles</span></li>
+        <li>&nbsp;&nbsp;</li>
+        <li><span class="menuitem">Write!</span></li>
+        <li>&nbsp;&nbsp;</li>
+        <li><span class="menuitem">Advertise!</span></li>
+        <li>&nbsp;&nbsp;</li>
+        <li><span class="menuitem">Subscribe</span></li>
+        <li>&nbsp;&nbsp;</li>
+        <li><span class="menuitem">Contact</span></li>
+    </ul>
+</div>
+<div id="contentblock">
+    <div id="content">
+      <?php echo $this->content; ?>
+    </div>
+</div>
+<!-- Unnamed (Shape) -->
+<div id="footerblock">
+   <p><span>Copyright 2015 New Holland Press</span></p>
+</div>        
+<div id="blank_footer">
+<br/>
+</div>
+<div id="hidden"></div>
+    <div id="floats">
+	<div id="dialog">
+	</div>
+	<div id="picture">
+	</div>
+        <div id="wordage">
+        </div>
+    </div> 
+<div id="logout"></div>
+</body>
+</html>

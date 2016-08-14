@@ -1,0 +1,2 @@
+    	$log = $this->getServiceLocator()->get('log');
+    	$log->info('Will work equally well');

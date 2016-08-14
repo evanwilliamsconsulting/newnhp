@@ -1,0 +1,73 @@
+ContainerItem:
+    type: entity
+    table: containeritem
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        containerid:
+            type: integer
+            nullable: false
+            options:
+               unsigned: false
+        containertypeid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        containertypeidref:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        width:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        height:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        gluex:
+            type: boolean
+            nullable: false
+        gluey:
+            type: boolean
+            nullable: false
+        prevx:
+            type: boolean
+            nullable: false
+        prevy:
+            type: boolean
+            nullable: false
+        resetx:
+            type: boolean
+            nullable: false
+        resety:
+            type: boolean
+            nullable: false
+        drift:
+            type: boolean
+            nullable: false
+        gravity:
+            type: boolean
+            nullable: false
+        offsetx:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        offsety:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    lifecycleCallbacks: {  }

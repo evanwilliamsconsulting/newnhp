@@ -1,0 +1,7 @@
+        username:
+            type: text
+            nullable: false
+            length: 50
+        original:
+            type: datetime
+            nullable: false
