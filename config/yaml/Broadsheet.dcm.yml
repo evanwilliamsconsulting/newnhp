@@ -1,0 +1,32 @@
+Broadsheet:
+    type: entity
+    table: broadsheet
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        pageno:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: pageNo
+        pagewidth:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: pageWidth
+        pageheight:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: pageHeight
+    lifecycleCallbacks: {  }

@@ -1,0 +1,26 @@
+Article:
+    type: entity
+    table: article
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        columnsize:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: columnSize
+        verbage:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

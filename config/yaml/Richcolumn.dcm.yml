@@ -1,0 +1,119 @@
+Richcolumn:
+    type: entity
+    table: richcolumn
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        width:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        height:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        gluex:
+            type: boolean
+            nullable: false
+        gluey:
+            type: boolean
+            nullable: false
+        prevx:
+            type: boolean
+            nullable: false
+        prevy:
+            type: boolean
+            nullable: false
+        resetx:
+            type: boolean
+            nullable: false
+        resety:
+            type: boolean
+            nullable: false
+        drift:
+            type: boolean
+            nullable: false
+        gravity:
+            type: boolean
+            nullable: false
+        offsetx:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        offsety:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        article:
+            type: object
+            nullable: false
+            length: null
+            options:
+                fixed: false
+        startline:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: startLine
+        endline:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: endLine
+        useremainder:
+            type: boolean
+            nullable: false
+            column: useRemainder
+        usecontinuedon:
+            type: boolean
+            nullable: false
+            column: useContinuedOn
+        continuedon:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+            column: continuedOn
+        usecontinuedfrom:
+            type: boolean
+            nullable: false
+            column: useContinuedFrom
+        continuedfrom:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+            column: continuedFrom
+        charsperline:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: charsPerLine
+        textclass:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+            column: textClass
+        addlineheight:
+            type: boolean
+            nullable: false
+            column: addLineHeight
+    lifecycleCallbacks: {  }

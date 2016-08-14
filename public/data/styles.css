@@ -1,0 +1,281 @@
+﻿body {
+  background-image:none;
+  position:static;
+  left:auto;
+  margin-left:10px;
+  margin-right:10px;
+  text-align:left;
+}
+.itemHelper_Wide {
+	background-color:#0000EE;
+}
+.itemHelper_Wide > ul {
+	list-style:none;
+}
+.itemHelper_Wide > ul > li {
+	display:inline;
+}
+.sitelist {
+    list-style:none;
+}
+.sitetab {
+    color:white;
+    font-size:18pt;
+    display:inline;
+}
+.sidebar {
+	background-image: url("/images/home/u28.png")
+}
+#site_toolbar {
+	background-color:black;
+	width:99%;
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+	top:-10px;
+}
+#correspondent-toolbar {
+	width: 80%;
+	background-color:#dd2266;
+	color:white;
+	margin-left:20%;
+	margin-right:auto;
+	margin-top:5px;
+	margin-bottom:0px;
+	position:relative;
+	flush:right;
+	text-align:left;
+	background-color:black;
+	margin-left:20%;
+	margin-right:auto;
+	position:relative;
+	top:-10px;
+}
+#masthead {
+	width: 99%;
+	background-color:#da2f61;
+	color:white;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:5px;
+	margin-bottom:0px;
+	text-align:center;
+
+}
+#masthead > span {
+	font-size:64pt;
+}
+#welcome {
+	position:absolute;
+	top:20px;
+	left:20px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:5px;
+	margin-bottom:0px;
+	width:20%;	
+}
+#topbar {
+	width: 79%;
+	background-color:#da2f61;
+	color:white;
+	margin-left:20%;
+	margin-right:auto;
+	margin-top:5px;
+	margin-bottom:0px;
+	text-align:center;
+}
+#topbar > span {
+	font-size:20pt;
+}
+.wordage-item {
+	width: 80%;
+	background-color:#da2f61;
+	color:white;
+	margin-left:20%;
+	margin-right:auto;
+	margin-top:5px;
+	margin-bottom:0px;
+	position:relative;
+	flush:right;
+	text-align:left;
+	float:top;
+	height:200px;
+}
+.wordage-item > span {
+	font-size:11pt;
+}
+.wordage-item-title {
+	position:relative;
+	width:30%;
+	left:0%;
+	float:right;
+}
+.wordage-item-text {
+	width:70%;
+	left:0%;
+	top:10px;
+	height:auto;
+	flush:right;
+	position:relative;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+.wordage-edit-text {
+	position:relative;
+	top:10px;
+	left:10px;
+	height:60%;
+	width:60%;
+	background-color:white;
+	color:black;
+	margin:10px;
+}
+.wordage-edit-text > textarea {
+	width:99%;
+}
+.picture-item {
+	width: 80%;
+	background-color:#da2f61;
+	color:white;
+	margin-left:20%;
+	margin-right:auto;
+	margin-top:5px;
+	margin-bottom:0px;
+	position:relative;
+	flush:right;
+	text-align:left;
+	float:top;
+	height:200px;
+}
+.picture-item > span {
+	font-size:11pt;
+}
+.picture-item-caption {
+	position:relative;
+	width:30%;
+	left:0%;
+	float:right;
+}
+.picture-item-image {
+	width:70%;
+	left:0%;
+	top:10px;
+	height:auto;
+	flush:right;
+	position:relative;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+.picture-edit-image {
+	position:relative;
+	top:0px;
+	left:0px;
+	height:auto;
+	width:auto;
+	background-color:white;
+	color:black;
+	margin:10px;
+}
+.picture-edit-text > textarea {
+	width:99%;
+}
+#slogan {
+	text-align:left;
+	position:relative;
+	top:-40px;
+}
+#slogan > span {
+	font-size:18pt;
+}
+#issue_date {
+	text-align:right;
+	position:relative;
+	top:32px;	
+}
+#issue_date > span {
+	font-size:18pt;
+}
+#login_box {
+	background-color:#da2f61;
+	color:white;
+	width:250px;
+	height:195px;
+	position:absolute;
+	top:210px;
+	left:160px;
+}
+.item {
+	width: 79%;
+	margin-left:20%;
+	margin-right:auto;
+	margin-top:5px;
+	margin-bottom:0px;
+	position:relative;
+	left:0%;
+}
+.item_sidebar {
+	width: 19%;
+	postition:relative;
+	left:1%;
+}
+.content_div {
+	width:98%;
+	position:absolute;
+}
+
+.itemlist {
+    list-style:none;
+}
+.itemtab {
+    font-size:18pt;
+    display:inline;
+}
+#footer {
+	width: auto;
+	background-color:#da2f61;
+	color:white;
+	margin-left:5px;
+	margin-right:auto;
+	margin-top:5px;
+	margin-bottom:0px;
+	position:relative;
+	flush:right;
+	text-align:left;
+	float:top;
+	height:20px;
+}
+#hidden {
+}
+#picture {
+        position:absolute;
+	top:10px;
+	left:10px;
+	width:90%;
+	height:90%;
+	background-color:white;
+	opacity:1.0;
+}
+#wordage {
+        position:absolute;
+	margin:auto;
+	top:30px;
+	left:30px;
+	width:80%;
+	height:80%;
+	background-color:white;
+	opacity:1.0;
+}
+#floats {
+	position:fixed;
+	background-color:#dd2266;
+	margin:auto;
+	top:5%;
+	left:5%;
+	width:90%;
+	height:90%;
+	opacity: 0.9;
+}
+#dialog {
+	display:none;
+}

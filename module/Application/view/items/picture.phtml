@@ -1,0 +1,10 @@
+<div style="background-color:<?php echo $this->bcolor;?>" class="picture-item" id="picture-<?php echo $this->id;?>">
+    <div class="picture-item-caption">
+        <span><?php echo $this->caption;?></span>
+	<br />
+        <span><?php echo $this->original;?></span>
+    </div>
+    <div class="picture-item-image" onclick="clickPictureItem('picture-<?php echo $this->id;?>')">
+    	<span><img src="<?php echo $this->picture; ?>"></span>
+    </div>
+</div>

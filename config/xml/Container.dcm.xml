@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Container" table="Container">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="background" type="blob" column="background" nullable="false"/>
+    <field name="frame" type="boolean" column="frame" nullable="false"/>
+    <field name="backgroundwidth" type="integer" column="backgroundwidth" nullable="false"/>
+    <field name="backgroundheight" type="integer" column="backgroundheight" nullable="false"/>
+  </entity>
+</doctrine-mapping>

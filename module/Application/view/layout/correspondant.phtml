@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="/data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="/data/jquery-te-1.4.0.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/darkroomjs/build/darkroom.css">
+    <link rel="stylesheet" href="/darkroomjs/css/page.css">
+    <link href="/css/common.min.css" rel="stylesheet">
+    <link href="/css/docs.min.css" rel="stylesheet">
+    <link href="//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css" rel="stylesheet">
+    <link href="//afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+    <script src="/resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="/resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="/js/nhpress.js"></script>
+    <script src='/tinymce/tinymce.min.js'></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return '/resources//images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return '/resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return '/resources/reload.html'; };
+    </script>
+<script type="text/javascript">
+        tinymce.init({
+            selector: "#wordarea"
+        });
+        tinymce.init({
+            selector: "#wordage > label > textarea"
+        });
+
+    </script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-5106157-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+  <body>
+    <div id="base">
+      <!-- Unnamed (Shape) -->
+      <div id="topbar">
+          <span>New Holland Press</span>
+          <!--div id="user_toolbar">
+          	<?php echo $this->layout()->user_toolbar; ?>
+          </div-->
+          <div id="slogan">
+              <div id="issue_date">
+                  <span>October 14, 2015&nbsp;&nbsp;</span>
+              </div>
+              <span>&nbsp;&nbsp;A Paper of Discussion</span>
+          </div>
+      </div>
+      <div id="welcome">
+      	<span>Evan Williams</span>
+      </div>
+
+      <!-- Unnamed (Shape) -->
+      <div id="u30" class="ax_shape">
+      	 <div id="content">
+	     <div class="content-div">
+                 <?php echo $this->content; ?>
+                 <div id="footer">
+                     <p><span>Copyright 2015 New Holland Press</span></p>
+                 </div>
+	     </div>
+         </div>
+      </div>
+
+    </div>
+    <div id="hidden">
+    </div>
+    <div id="floats">
+	<div id="dialog">
+	</div>
+	<div id="picture">
+	</div>
+        <div id="wordage">
+        </div>
+    </div> 
+  </body>
+</html>

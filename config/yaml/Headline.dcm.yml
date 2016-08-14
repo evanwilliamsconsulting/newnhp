@@ -1,0 +1,87 @@
+Headline:
+    type: entity
+    table: headline
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        width:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        height:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        gluex:
+            type: boolean
+            nullable: false
+        gluey:
+            type: boolean
+            nullable: false
+        prevx:
+            type: boolean
+            nullable: false
+        prevy:
+            type: boolean
+            nullable: false
+        resetx:
+            type: boolean
+            nullable: false
+        resety:
+            type: boolean
+            nullable: false
+        drift:
+            type: boolean
+            nullable: false
+        gravity:
+            type: boolean
+            nullable: false
+        offsetx:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        offsety:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        headline:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        topline:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        usetopline:
+            type: boolean
+            nullable: false
+        fontsize:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        headlineclass:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        italic:
+            type: boolean
+            nullable: false
+    lifecycleCallbacks: {  }

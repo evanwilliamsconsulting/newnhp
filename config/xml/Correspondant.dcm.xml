@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Correspondant" table="Correspondant">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="username" type="string" column="username" length="255" nullable="false"/>
+    <field name="password" type="string" column="username" length="255" nullable="false"/>
+    <field name="email" type="string" column="username" length="255" nullable="false"/>
+    <field name="handle" type="string" column="handle" length="255" nullable="false"/>
+    <field name="wordage" type="string" column="wordage" length="255" nullable="false"/>
+    <field name="picture" type="blob" column="picture" nullable="false"/>
+    <field name="width" type="integer" column="width" nullable="false"/>
+    <field name="height" type="integer" column="height" nullable="false"/>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Richcolumn" table="Richcolumn">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="width" type="integer" column="width" nullable="false"/>
+    <field name="height" type="integer" column="height" nullable="false"/>
+    <field name="gluex" type="boolean" column="gluex" nullable="false"/>
+    <field name="gluey" type="boolean" column="gluey" nullable="false"/>
+    <field name="prevx" type="boolean" column="prevx" nullable="false"/>
+    <field name="prevy" type="boolean" column="prevy" nullable="false"/>
+    <field name="resetx" type="boolean" column="resetx" nullable="false"/>
+    <field name="resety" type="boolean" column="resety" nullable="false"/>
+    <field name="drift" type="boolean" column="drift" nullable="false"/>
+    <field name="gravity" type="boolean" column="gravity" nullable="false"/>
+    <field name="offsetx" type="integer" column="offsetx" nullable="false"/>
+    <field name="offsety" type="integer" column="offsety" nullable="false"/>
+    <field name="article" type="object" column="article" nullable="false"/>
+    <field name="startline" type="integer" column="startLine" nullable="false"/>
+    <field name="endline" type="integer" column="endLine" nullable="false"/>
+    <field name="useremainder" type="boolean" column="useRemainder" nullable="false"/>
+    <field name="usecontinuedon" type="boolean" column="useContinuedOn" nullable="false"/>
+    <field name="continuedon" type="string" column="continuedOn" length="255" nullable="false"/>
+    <field name="usecontinuedfrom" type="boolean" column="useContinuedFrom" nullable="false"/>
+    <field name="continuedfrom" type="string" column="continuedFrom" length="255" nullable="false"/>
+    <field name="charsperline" type="integer" column="charsPerLine" nullable="false"/>
+    <field name="textclass" type="string" column="textClass" length="255" nullable="false"/>
+    <field name="addlineheight" type="boolean" column="addLineHeight" nullable="false"/>
+  </entity>
+</doctrine-mapping>

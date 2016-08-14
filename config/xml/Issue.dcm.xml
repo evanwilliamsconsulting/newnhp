@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Issue" table="Issue">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dateofpublication" type="datetime" column="dateOfPublication" nullable="false"/>
+    <field name="toggledivtagson" type="boolean" column="toggleDivTagsOn" nullable="false"/>
+    <field name="priceofcopy" type="decimal" column="priceOfCopy" precision="10" scale="0" nullable="false"/>
+    <field name="tagline" type="string" column="tagLine" length="255" nullable="false"/>
+    <field name="qrimage" type="blob" column="QRImage" nullable="false"/>
+    <field name="headingtheme" type="string" column="headingTheme" length="255" nullable="false"/>
+    <field name="secondtheme" type="string" column="secondTheme" length="255" nullable="false"/>
+    <field name="brace" type="string" column="brace" length="255" nullable="false"/>
+  </entity>
+</doctrine-mapping>

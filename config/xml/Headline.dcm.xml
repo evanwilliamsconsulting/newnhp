@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Headline" table="Headline">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="width" type="integer" column="width" nullable="false"/>
+    <field name="height" type="integer" column="height" nullable="false"/>
+    <field name="gluex" type="boolean" column="gluex" nullable="false"/>
+    <field name="gluey" type="boolean" column="gluey" nullable="false"/>
+    <field name="prevx" type="boolean" column="prevx" nullable="false"/>
+    <field name="prevy" type="boolean" column="prevy" nullable="false"/>
+    <field name="resetx" type="boolean" column="resetx" nullable="false"/>
+    <field name="resety" type="boolean" column="resety" nullable="false"/>
+    <field name="drift" type="boolean" column="drift" nullable="false"/>
+    <field name="gravity" type="boolean" column="gravity" nullable="false"/>
+    <field name="offsetx" type="integer" column="offsetx" nullable="false"/>
+    <field name="offsety" type="integer" column="offsety" nullable="false"/>
+    <field name="headline" type="string" column="headline" length="255" nullable="false"/>
+    <field name="topline" type="string" column="topline" length="255" nullable="false"/>
+    <field name="usetopline" type="boolean" column="usetopline" nullable="false"/>
+    <field name="fontsize" type="integer" column="fontsize" nullable="false"/>
+    <field name="headlineclass" type="string" column="headlineclass" length="255" nullable="false"/>
+    <field name="italic" type="boolean" column="italic" nullable="false"/>
+  </entity>
+</doctrine-mapping>
